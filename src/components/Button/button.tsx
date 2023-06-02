@@ -22,31 +22,40 @@ interface BaseButtonProps {
     href?: string;
 }
 
-export const Button: React.FC<BaseButtonProps>  = (props) => {
+// intersection Type
+type NativeButtonProps = BaseButtonProps & React.ButtonHTMLAttributes<HTMLElement>
+type AnchorButtonProps = BaseButtonProps & React.AnchorHTMLAttributes<HTMLElement>
+export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
+
+export const Button: React.FC<ButtonProps> = (props) => {
     const {
         btnType,
+        className,
         disabled,
         size,
         children,
-        href
+        href,
+        ...restProps
     } = props
-    const classes = classNames('btn',{
+    const classes = classNames('btn', className, {
         [`btn-${btnType}`]: btnType,
         [`btn-${size}`]: size,
         'disabled': (btnType === ButtonType.Link) && disabled
     })
-    if(btnType === ButtonType.Link && href){
+    if (btnType === ButtonType.Link && href) {
         return (
             <a
+                {...restProps}
                 className={classes}
-                href={disabled ? '' :  href}
+                href={disabled ? '' : href}
             >
                 {children}
             </a>
         )
-    }else{
+    } else {
         return (
             <button
+                {...restProps}
                 className={classes}
                 disabled={disabled}
             >

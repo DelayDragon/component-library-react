@@ -8,7 +8,7 @@ function App() {
 
       <Button size={ButtonSize.Small}>hello</Button>
       <Button btnType={ButtonType.Primary} size={ButtonSize.Large}>large HELLO</Button>
-      <Button btnType={ButtonType.Link} size={ButtonSize.Small} href='http://www.baidu.com'>Baidu Link</Button>
+      <Button btnType={ButtonType.Link} target='_blank' size={ButtonSize.Small} href='http://www.baidu.com'>Baidu Link</Button>
       <Button btnType={ButtonType.Link} disabled href='http://www.baidu.com'>Baidu Link</Button>
 
     </>
