@@ -6,6 +6,7 @@
     "module": "ESNext",
     "esModuleInterop":true,
     "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -21,7 +22,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "test/components/button/button.test.tsx","./setupTests.ts"],
+  "include": ["src", "test/components/Button/button.test.tsx","./setupTests.ts"],
   "references": [{ "path": "./tsconfig.node.json" }],
 
 }
