@@ -35,7 +35,7 @@ describe('test Menu and MenuItem component', () => {
         expect(disabledElement).toHaveClass('menu-item is-disabled')
 
     })
-    it('click items should change acive and call the right callback', () => {
+    it('click items should change active and call the right callback', () => {
         const thirdItem = wrapper.getByText('xyz')
         fireEvent.click(thirdItem)
         expect(thirdItem).toHaveClass('is-active')

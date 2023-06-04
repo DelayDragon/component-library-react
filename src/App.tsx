@@ -23,6 +23,7 @@ function App() {
         <MenuItem index={2}>
           cool link 3
         </MenuItem>
+
       </Menu>
     </>
   )
