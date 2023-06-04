@@ -14,7 +14,7 @@ function App() {
       <Button btnType={ButtonType.Link} target='_blank' size={ButtonSize.Small} href='http://www.baidu.com'>Baidu Link</Button>
       <Button btnType={ButtonType.Link} disabled href='http://www.baidu.com'>Baidu Link</Button>
       <br />
-      <Menu defaultIndex={0} mode='vertical' onSelect={(index) => console.log(index)}>
+      <Menu defaultIndex={'0'} mode='vertical' onSelect={(index) => console.log(index)} defaultOpenSubMenus={['2']}>
         <MenuItem>
           cool link 1
         </MenuItem>
@@ -29,12 +29,20 @@ function App() {
             dorpdown2
           </MenuItem>
         </SubMenu>
+        <SubMenu title={'测试2'}>
+          <MenuItem>
+            dorpdown1
+          </MenuItem>
+          <MenuItem>
+            dorpdown2
+          </MenuItem>
+        </SubMenu>
         <MenuItem>
           cool link 3
         </MenuItem>
       </Menu>
       <br />
-      <Menu defaultIndex={0} mode='horizontal' onSelect={(index) => console.log(index)}>
+      <Menu defaultIndex={'0'} mode='horizontal' onSelect={(index) => console.log(index)}>
         <MenuItem>
           cool link 1
         </MenuItem>

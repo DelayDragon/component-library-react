@@ -4,15 +4,18 @@ import { MenuContext } from './menu'
 import { MenuItemProps } from "./menuItem"; 
 
 export interface SubMenuProps {
-    index?: number;
+    index?: string;
     title: string;
     className?: string;
     children?: React.ReactNode
 }
 
 export const SubMenu: React.FC<SubMenuProps> = ({index, title, children, className}) => {
-    const [menuOpen, setMenuOpen] = useState(false)
     const context = React.useContext(MenuContext)
+    const openedSubMenus = context.defaultOpenSubMenus as Array<string>
+    const idOpened = (index && context.mode === 'vertical') ? openedSubMenus.includes(index) : false
+    const [menuOpen, setMenuOpen] = useState(idOpened)
+
     const classes = classNames('menu-item submenu-item', className, {
         'is-active': context.index === index
     })
@@ -41,11 +44,11 @@ export const SubMenu: React.FC<SubMenuProps> = ({index, title, children, classNa
         const subMenuClasses = classNames('viking-submenu', {
             'menu-opened': menuOpen
         })
-        const childrenComponent = React.Children.map(children, (child, index) => {
+        const childrenComponent = React.Children.map(children, (child, childIndex) => {
             const childElement = child as React.FunctionComponentElement<MenuItemProps>
             if(childElement.type.displayName === 'MenuItem'){
                 return React.cloneElement(childElement, {
-                    index
+                    index: `${index}-${childIndex}`
                 })
             }else{
                 console.error("warning: SubMenu has A child which is not a MenuItem component!")
