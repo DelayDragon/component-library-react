@@ -2,6 +2,7 @@
 import { Button, ButtonType, ButtonSize } from './components/Button/button'
 import { Menu } from './components/Menu/menu'
 import { MenuItem } from './components/Menu/menuItem'
+import { SubMenu } from './components/Menu/subMenu'
 
 function App() {
   return (
@@ -14,16 +15,43 @@ function App() {
       <Button btnType={ButtonType.Link} disabled href='http://www.baidu.com'>Baidu Link</Button>
       <br />
       <Menu defaultIndex={0} mode='vertical' onSelect={(index) => console.log(index)}>
-        <MenuItem index={0}>
+        <MenuItem>
           cool link 1
         </MenuItem>
-        <MenuItem index={1} disabled>
+        <MenuItem disabled>
           cool link 2
         </MenuItem>
-        <MenuItem index={2}>
+        <SubMenu title={'测试1'}>
+          <MenuItem>
+            dorpdown1
+          </MenuItem>
+          <MenuItem>
+            dorpdown2
+          </MenuItem>
+        </SubMenu>
+        <MenuItem>
           cool link 3
         </MenuItem>
-
+      </Menu>
+      <br />
+      <Menu defaultIndex={0} mode='horizontal' onSelect={(index) => console.log(index)}>
+        <MenuItem>
+          cool link 1
+        </MenuItem>
+        <MenuItem disabled>
+          cool link 2
+        </MenuItem>
+        <SubMenu title={'测试1'}>
+          <MenuItem>
+            dorpdown1
+          </MenuItem>
+          <MenuItem>
+            dorpdown2
+          </MenuItem>
+        </SubMenu>
+        <MenuItem>
+          cool link 3
+        </MenuItem>
       </Menu>
     </>
   )
