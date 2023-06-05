@@ -1,5 +1,5 @@
-
-import { Button, ButtonType, ButtonSize } from './components/Button/button'
+import React, { useState } from 'react'
+import { Button } from './components/Button/button'
 import { Menu } from './components/Menu/menu'
 import { MenuItem } from './components/Menu/menuItem'
 import { SubMenu } from './components/Menu/subMenu'
@@ -7,20 +7,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { Icon } from './components/Icon/icon'
+import { Transition } from './components/Transition/transition'
 
 library.add(fas)
 
-function App() {
+const App: React.FC = () => {
+  const [show, setShow] = useState(false)
   return (
     <>
       <Icon icon={'arrow-down'} theme='primary' size='4x'></Icon>
       <FontAwesomeIcon icon={'coffee'} size='2x' />
-      <Button disabled size={ButtonSize.Small}>default</Button>
+      <Button disabled size={'sm'}>default</Button>
 
-      <Button size={ButtonSize.Small}>hello</Button>
-      <Button btnType={ButtonType.Primary} size={ButtonSize.Large}>large HELLO</Button>
-      <Button btnType={ButtonType.Link} target='_blank' size={ButtonSize.Small} href='http://www.baidu.com'>Baidu Link</Button>
-      <Button btnType={ButtonType.Link} disabled href='http://www.baidu.com'>Baidu Link</Button>
+      <Button size={'sm'}>hello</Button>
+      <Button btnType={'primary'} size={'lg'}>large HELLO</Button>
+      <Button btnType={'link'} target='_blank' size={'sm'} href='http://www.baidu.com'>Baidu Link</Button>
+      <Button btnType={'link'} disabled href='http://www.baidu.com'>Baidu Link</Button>
       <br />
       <Menu defaultIndex={'0'} mode='vertical' onSelect={(index) => console.log(index)} defaultOpenSubMenus={['2']}>
         <MenuItem>
@@ -69,6 +71,38 @@ function App() {
           cool link 3
         </MenuItem>
       </Menu>
+      <Button size='lg' btnType='primary' onClick={() => setShow(!show)}>
+        showOrunshow
+      </Button>
+      <Transition
+        in={show}
+        timeout={500}
+        animation='zoom-in-left'
+        wrapper
+      >
+        <div>
+          <p>
+            Edit <code>src/App.tsx</code> and save to reload.
+          </p>
+          <p>
+            Edit <code>src/App.tsx</code> and save to reload.
+          </p>
+          <p>
+            Edit <code>src/App.tsx</code> and save to reload.
+          </p>
+          <p>
+            Edit <code>src/App.tsx</code> and save to reload.
+          </p>
+        </div>
+      </Transition>
+      <Transition
+        in={show}
+        timeout={500}
+        animation='zoom-in-left'
+        wrapper
+      >
+        <Button btnType='primary' size='lg'>A Large Button</Button>
+      </Transition>
     </>
   )
 }
