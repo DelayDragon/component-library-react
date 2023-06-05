@@ -12,6 +12,9 @@
     "test-c": "jest --coverage"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@types/classnames": "^2.3.1",
     "classnames": "^2.3.2",
     "react": "^18.2.0",

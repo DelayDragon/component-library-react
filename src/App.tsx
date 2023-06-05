@@ -3,10 +3,18 @@ import { Button, ButtonType, ButtonSize } from './components/Button/button'
 import { Menu } from './components/Menu/menu'
 import { MenuItem } from './components/Menu/menuItem'
 import { SubMenu } from './components/Menu/subMenu'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { Icon } from './components/Icon/icon'
+
+library.add(fas)
 
 function App() {
   return (
     <>
+      <Icon icon={'arrow-down'} theme='primary' size='4x'></Icon>
+      <FontAwesomeIcon icon={'coffee'} size='2x' />
       <Button disabled size={ButtonSize.Small}>default</Button>
 
       <Button size={ButtonSize.Small}>hello</Button>
