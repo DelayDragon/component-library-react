@@ -7,6 +7,9 @@
 // mixin
 @import 'mixins';
 
+// animation
+@import './animation';
+
 // button
 @import '../components/Button/style';
 
@@ -14,4 +17,4 @@
 @import '../components/Menu/styel';
 
 // icon
-@import '../components//Icon/style'
+@import '../components//Icon/style';

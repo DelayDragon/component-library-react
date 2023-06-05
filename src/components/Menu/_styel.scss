@@ -28,22 +28,7 @@
             color: $menu-item-active-color;
             border-bottom: $menu-item-active-border-width solid $menu-item-active-color
         }
-
-        // 覆盖垂直模式的hover状态
-        // .is-vertical {
-        //     .arrow-icon {
-        //         transform: rotate(0deg) !important;
-        //     }
-        // }
-        // .is-vertical.is-opened {
-        //     .arrow-icon {
-        //         transform: rotate(180deg) !important;
-        //     }
-        // }
-
         .viking-submenu {
-            display: none;
-            // position: absolute;
             top: calc(100% + 8px);
             list-style: none;
             padding-left: 0;
@@ -62,8 +47,8 @@
         }
 
         .viking-submenu.menu-opened {
-            display: block;
-            opacity: 1;
+            // display: block;
+            // opacity: 1;
         }
     }
 
@@ -72,7 +57,27 @@
         .submenu-title {
             display: flex;
             align-items: center;
+            .arrow-icon {
+                transition: transform .25s ease-in-out;
+                margin-left: 3px;
+            }
+            &:hover {
+                .arrow-icon{
+                    transform: rotate(180deg);
+                }
+            }
         }
+    }
+}
+// 覆盖垂直模式的hover状态
+.is-vertical {
+    .arrow-icon {
+        transform: rotate(0deg) !important;
+    }
+}
+.is-vertical.is-opened {
+    .arrow-icon {
+        transform: rotate(180deg) !important;
     }
 }
 
