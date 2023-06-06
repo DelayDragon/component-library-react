@@ -1,6 +1,7 @@
 import React from "react";
 import classNames from 'classnames'
 
+
 // export enum ButtonSize {
 //     Large = 'lg',
 //     Small = 'sm'
@@ -39,6 +40,7 @@ export const Button: React.FC<ButtonProps> = (props) => {
         size,
         children,
         href,
+        backgroundColor,
         ...restProps
     } = props
     const classes = classNames('btn', className, {
@@ -49,9 +51,10 @@ export const Button: React.FC<ButtonProps> = (props) => {
     if (btnType === 'link' && href) {
         return (
             <a
-                {...restProps}
                 className={classes}
+                style={{ backgroundColor }}
                 href={disabled ? '' : href}
+                {...restProps}
             >
                 {children}
             </a>
@@ -59,9 +62,10 @@ export const Button: React.FC<ButtonProps> = (props) => {
     } else {
         return (
             <button
-                {...restProps}
                 className={classes}
+                style={{ backgroundColor }}
                 disabled={disabled}
+                {...restProps}
             >
                 {children}
             </button>
