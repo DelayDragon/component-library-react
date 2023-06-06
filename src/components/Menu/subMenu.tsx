@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import classNames from "classnames";
-import { MenuContext } from './menu'
-import { MenuItemProps } from "./menuItem";
-import { Icon } from "../Icon/icon";
+import { MenuContext } from './Menu'
+import { MenuItemProps } from "./MenuItem";
+import { Icon } from "../Icon/Icon";
 // import { CSSTransition } from 'react-transition-group'
 import { Transition } from "../Transition/transition";
 

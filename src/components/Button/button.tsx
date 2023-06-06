@@ -22,6 +22,8 @@ interface BaseButtonProps {
     btnType?: ButtonType;
     children: React.ReactNode;
     href?: string;
+    backgroundColor?: string;
+    label?: string;
 }
 
 // intersection Type

@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import { Button } from './components/Button/button'
-import { Menu } from './components/Menu/menu'
-import { MenuItem } from './components/Menu/menuItem'
-import { SubMenu } from './components/Menu/subMenu'
+import { Button } from './components/Button/Button'
+import { Menu } from './components/Menu/Menu'
+import { MenuItem } from './components/Menu/MenuItem'
+import { SubMenu } from './components/Menu/SubMenu'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { Icon } from './components/Icon/icon'
+import { Icon } from './components/Icon/Icon'
 import { Transition } from './components/Transition/transition'
 
 library.add(fas)
