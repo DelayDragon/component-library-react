@@ -72,7 +72,7 @@ const App: React.FC = () => {
         </MenuItem>
       </Menu>
       <Button size='lg' btnType='primary' onClick={() => setShow(!show)}>
-        showOrunshow
+        show Or unshow
       </Button>
       <Transition
         in={show}
