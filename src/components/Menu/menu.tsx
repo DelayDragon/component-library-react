@@ -9,9 +9,10 @@ export interface MenuProps {
     className?: string;
     mode?: MenuMode;
     style?: React.CSSProperties;
-    children?: React.ReactNode
+    children?: React.ReactNode | React.ReactNode[];
     onSelect?: SelectCallback;
     defaultOpenSubMenus?: string[];
+    backgroundColor?: string;
 }
 
 interface IMenuContext {
@@ -31,7 +32,8 @@ export const Menu: React.FC<MenuProps> = (props) => {
         children,
         defaultIndex,
         onSelect,
-        defaultOpenSubMenus
+        defaultOpenSubMenus,
+        backgroundColor
     } = props
     const [currentActive, setCurrentActive] = useState(defaultIndex)
 
@@ -52,7 +54,7 @@ export const Menu: React.FC<MenuProps> = (props) => {
         defaultOpenSubMenus
     }
     const renderChildren = () => {
-        return React.Children.map(children, (child, index) => {      
+        return React.Children.map(children, (child, index) => { 
             const childElement = child as React.FunctionComponentElement<MenuItemProps>
             const { displayName } = childElement.type
             if(displayName === 'MenuItem' || displayName === 'SubMenu'){
@@ -65,7 +67,7 @@ export const Menu: React.FC<MenuProps> = (props) => {
         })
     }
     return (
-        <ul className={classes} style={style} data-testid='test-menu'>
+        <ul className={classes} style={{...style,backgroundColor}} data-testid='test-menu'>
             <MenuContext.Provider value={passedContext}>
                 {renderChildren()}
             </MenuContext.Provider>

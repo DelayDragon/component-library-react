@@ -1,5 +1,12 @@
 import type { Preview } from "@storybook/react";
 import '../src/styles/index.scss'
+import { themes } from "@storybook/theming";
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core'
+
+
+library.add(fas)
+
 
 const preview: Preview = {
   parameters: {
@@ -10,6 +17,9 @@ const preview: Preview = {
         date: /Date$/,
       },
     },
+    docs: {
+      theme: themes.light
+    }
   },
 };
 

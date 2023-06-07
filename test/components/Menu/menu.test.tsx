@@ -4,7 +4,7 @@
 
 import { fireEvent, render, RenderResult, cleanup, waitFor } from '@testing-library/react'
 import { MenuProps } from '../../../src/components/Menu/menu'
-import { GenerateMenu } from './testMenu'
+import { GenerateVerticalMenu } from './testMenu'
 
 const testProps: MenuProps = {
     defaultIndex: '0',
@@ -34,7 +34,7 @@ const createStyleFile = () => {
 let wrapper: RenderResult, menuElement: HTMLElement, activeElement: HTMLElement, disabledElement: HTMLElement
 describe('test Menu and MenuItem component', () => {
     beforeEach(() => {
-        wrapper = render(GenerateMenu(testProps))
+        wrapper = render(GenerateVerticalMenu(testProps))
         wrapper.container.append(createStyleFile())
         menuElement = wrapper.getByTestId('test-menu')
         activeElement = wrapper.getByText('active')
@@ -62,7 +62,7 @@ describe('test Menu and MenuItem component', () => {
     })
     it('should render vertical mode when mode is set to vertical', () => {
         cleanup()
-        const wrapper = render(GenerateMenu(testVerProps))
+        const wrapper = render(GenerateVerticalMenu(testVerProps))
         const menuElement = wrapper.getByTestId('test-menu')
         expect(menuElement).toHaveClass('menu-vertical')
     })
