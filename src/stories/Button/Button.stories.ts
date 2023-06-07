@@ -1,6 +1,5 @@
 import { type Meta, type StoryObj } from '@storybook/react';
 import { Button } from '../../components/Button/Button';
-
 import { CenterDecorator } from './CenterDecorator';
 
 
