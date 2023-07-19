@@ -11,8 +11,42 @@ const meta = {
   decorators: [CenterDecorator],
   tags: ['autodocs'],
   argTypes: {
-    backgroundColor: { control: 'color' },
+    backgroundColor: { 
+      description:'背景颜色',
+      control: 'color' 
+    },
+    btnType:{
+      description:"按钮类型"
+    },
+    children: {
+      description:'子节点',
+      table:{
+        type:{
+          summary: 'ReactNode | string'
+        }
+      }
+    },
+    className:{
+      description:"类名",
+    },
+    disabled: {
+      description:"是否可用"
+    },
+    size:{
+      description:'按钮尺寸大小'
+    },
+    href:{
+      description:'link按钮的链接'
+    },
   },
+  parameters:{
+    docs:{
+      description: {
+        component: "这是一个按钮组件",
+        
+      }
+    }
+  }
 } satisfies Meta<typeof Button>;
 
 export default meta;

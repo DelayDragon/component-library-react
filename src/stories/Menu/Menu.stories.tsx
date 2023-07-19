@@ -3,7 +3,6 @@ import { Menu } from '../../components/Menu/Menu';
 import { MenuItem } from '../../components/Menu/MenuItem';
 import { SubMenu } from '../../components/Menu/SubMenu';
 
-
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
     title: 'Example/Menu',
@@ -13,7 +12,7 @@ const meta = {
         mode: {
             description: '方向模式',
             table: {
-                type: { summary: 'string'},
+                type: { summary: 'string' },
             },
         },
         children: {
@@ -24,7 +23,7 @@ const meta = {
             }
         },
         onSelect: {
-            type: "function",
+            type: 'function',
             description: "被选择时调用回调"
         },
         defaultOpenSubMenus: {
@@ -47,11 +46,33 @@ const meta = {
             control: 'color'
         }
     },
+
     parameters: {
         docs: {
             description: {
                 component: "这是一个菜单组件"
-            }
+            },
+            subcomponents: {
+                MenuItem: {
+                    description: "A menu item that can be clicked to perform an action.",
+                    props: {
+                        disabled: {
+                            description:
+                                "The label to display for this menu item. This can be text, or an icon.",
+                            type: {
+                                summary: "boolean"
+                            },
+                            control: {
+                                type: 'radio',
+                            },
+                        },
+                        onClick: {
+                            description: "A callback function to be called when the menu item is clicked",
+                            control: null,
+                        },
+                    }
+                }
+            },
         },
     }
 } satisfies Meta<typeof Menu>;
@@ -77,7 +98,7 @@ export const Horizontal: Story = {
                 drop1
             </MenuItem>
         </SubMenu>],
-        defaultOpenSubMenus:['3']
+        defaultOpenSubMenus: ['3']
     },
     argTypes: {
         mode: {
