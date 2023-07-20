@@ -20,7 +20,6 @@
 }
 .icon-wrapper+.viking-input-inner {
     padding-right: 35px;
-
 }
 .viking-input-inner {
     width: 100%;
@@ -54,7 +53,7 @@
 .viking-input-group-prepend,
 .viking-input-group-append {
     display: flex;
-    align-items: certer;
+    align-items: center;
     padding: $input-padding-y $input-padding-x;
     margin-bottom: 0;
     font-size: $input-font-size;

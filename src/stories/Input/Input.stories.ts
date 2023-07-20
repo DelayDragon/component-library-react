@@ -13,14 +13,23 @@ type Story = StoryObj<typeof meta>
 
 export const sm : Story = {
     args: {
-        style:{width:'500px'},
         size:'sm',
-        disabled:false
+        disabled:false,
+        placeholder:'placeholder',
+        append:'.com',
     }
 }
 export const lg : Story = {
     args: {
         size:'lg',
-        disabled:false
+        disabled:false,
+        prepend:'http://'
+    }
+}
+
+export const disabledInput : Story = {
+    args: {
+        disabled:true,
+        placeholder:'banned'
     }
 }

@@ -34,7 +34,6 @@ export const Input: React.FC<InputProps> = (props) => {
         prepend,
         append,
         children,
-        style,
         ...restProps
     } = props
     // 根据属性计算不同的classname
@@ -49,7 +48,6 @@ export const Input: React.FC<InputProps> = (props) => {
     return (
         <div
             className={classes}
-            style={style}
         >
             {prepend && <div className="viking-input-group-prepend">{prepend}</div>}
             {icon && <div className="icon-wrapper"><Icon icon={icon} title=''></Icon></div>}
