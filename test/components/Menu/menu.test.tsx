@@ -3,7 +3,7 @@
  */
 
 import { fireEvent, render, RenderResult, cleanup, waitFor } from '@testing-library/react'
-import { MenuProps } from '../../../src/components/Menu/menu'
+import { MenuProps } from '../../../src/components/Menu/Menu'
 import { GenerateVerticalMenu } from './testMenu'
 
 const testProps: MenuProps = {

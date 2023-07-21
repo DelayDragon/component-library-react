@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import classNames from "classnames";
 import { MenuContext } from './Menu'
 import { MenuItemProps } from "./MenuItem";
-import { Icon } from "../Icon/Icon";
+// import { Icon } from "../Icon/Icon";
 // import { CSSTransition } from 'react-transition-group'
 import { Transition } from "../Transition/transition";
 
@@ -87,7 +87,7 @@ export const SubMenu: React.FC<SubMenuProps> = ({ index, title, children, classN
         <li key={index} className={classes} {...hoverEvents}>
             <div className="submenu-title" {...clickEvents}>
                 {title}
-                <Icon icon='angle-down' className="arrow-icon"></Icon>
+                {/* <Icon icon='angle-down' className="arrow-icon"></Icon> */}
             </div>
             {renderChildren()}
         </li>

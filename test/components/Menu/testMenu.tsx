@@ -2,7 +2,7 @@
 import React from 'react'
 import { Menu, MenuProps } from '../../../src/components/Menu/Menu'
 import { MenuItem } from '../../../src/components/Menu/MenuItem'
-import { SubMenu } from '../../../src/components/Menu/SubMenu'
+import {SubMenu} from '../../../src/components/Menu/SubMenu'
 
 
 export const GenerateVerticalMenu = (props: MenuProps) => {
