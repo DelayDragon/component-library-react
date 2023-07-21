@@ -1,21 +1,29 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, ReactElement, useState } from 'react';
 import  {Input,InputProps } from '../Input/Input'
 
+interface DataSourceObject {
+    [key: string]: string;
+}
+
+export type DataSourceType<T = {}> = T & DataSourceObject
+
 export interface AutoCompleteProps extends Omit<InputProps, 'onSelect'> {
-    fetchSuggestions: (str: string) => string[];
-    onSelect?: (item: string) => void
+    fetchSuggestions: (str: string) => DataSourceType[];
+    onSelect?: (item: DataSourceType) => void;
+    renderOption?: (item: DataSourceType) => ReactElement;
 }
 
 export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
     const {
         fetchSuggestions,
         onSelect,
+        renderOption,
         value,
         ...restProps
     } = props
 
     const [inputValue, setInputValue] = useState(value)
-    const [suggestions, setSuggestions] = useState<string[]>([])
+    const [suggestions, setSuggestions] = useState<DataSourceType[]>([])
 
     console.log(suggestions)
     const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
@@ -28,12 +36,15 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
             setSuggestions([])
         }
     }
-    const handleSelect = (item: string) => {
-        setInputValue(item)
+    const handleSelect = (item: DataSourceType) => {
+        setInputValue(item.value)
         setSuggestions([])
         if(onSelect){
             onSelect(item)
         }
+    }
+    const renderTemplate = (item: DataSourceType) => {
+        return renderOption ? renderOption(item) : item.value
     }
 
     const generateDropdown = () => {
@@ -43,7 +54,7 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
                     suggestions.map((item, index) => {
                         return (
                             <li key={index} onClick={() => handleSelect(item)}>
-                                {item}
+                                {renderTemplate(item)}
                             </li>
                         )
                     })
