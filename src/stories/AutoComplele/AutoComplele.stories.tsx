@@ -27,7 +27,8 @@ const SimpleComplete: React.FC = () => {
     const renderOption = (item: DataSourceType) => {
         return (
             <>
-                {
+                {/* 展示所有属性与值 */}
+                {/* {
                     Object.keys(item).map((key, index) => {
                         while(index < 3){
                             if (item.hasOwnProperty(key)) {
@@ -35,7 +36,8 @@ const SimpleComplete: React.FC = () => {
                             }
                         } 
                     })
-                }
+                } */}
+                <h3>value: {item.value}</h3>
             </>
 
         )
