@@ -1,8 +1,9 @@
-import { ChangeEvent, KeyboardEvent, ReactElement, useEffect, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, ReactElement, useEffect, useRef, useState } from 'react';
 import { Input, InputProps } from '../Input/Input'
 import classNames from 'classnames';
 import { Icon } from '../Icon/Icon';
 import useDebounce from '../../hooks/useDebounce';
+import useClickOutside from '../../hooks/useClickOutside';
 
 interface DataSourceObject {
     [key: string]: string;
@@ -30,9 +31,14 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
     const [loading, setLoading] = useState(false)
     const [hightlightIndex, setHightlightIndex] = useState(-1)
     const debounceValue = useDebounce(inputValue, 500)
+    const triggerSearch = useRef(false)
+    const componentRef = useRef<HTMLDivElement>(null)
 
+    useClickOutside(componentRef, () => {
+        setSuggestions([])
+    })
     useEffect(() => {
-        if (debounceValue) {
+        if (debounceValue && triggerSearch.current ) {
             console.log('triggered')
             setLoading(true)
             const results = fetchSuggestions(debounceValue)
@@ -99,6 +105,7 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value.trim()
         setInputValue(value)
+        triggerSearch.current = true
     }
     const handleSelect = (item: DataSourceType) => {
         setInputValue(item.value)
@@ -106,6 +113,7 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
         if (onSelect) {
             onSelect(item)
         }
+        triggerSearch.current = false
     }
     const renderTemplate = (item: DataSourceType) => {
         return renderOption ? renderOption(item) : item.value
@@ -128,7 +136,7 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
     }
 
     return (
-        <div className='viking-auto-complete'>
+        <div className='viking-auto-complete' ref={componentRef}>
             <Input
                 onChange={handleChange}
                 onKeyDown={handleKeydown}
