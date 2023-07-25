@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { Icon } from '../Icon/Icon';
 import useDebounce from '../../hooks/useDebounce';
 import useClickOutside from '../../hooks/useClickOutside';
+import { Transition } from '../Transition/transition';
 
 interface DataSourceObject {
     [key: string]: string;
@@ -38,7 +39,7 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
         setSuggestions([])
     })
     useEffect(() => {
-        if (debounceValue && triggerSearch.current ) {
+        if (debounceValue && triggerSearch.current) {
             console.log('triggered')
             setLoading(true)
             const results = fetchSuggestions(debounceValue)
@@ -58,7 +59,7 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
 
     const hightlight = (index: number) => {
         if (index < 0) index = 0
-        if (index >= suggestions.length) {
+        if (index >= suggestions?.length) {
             index = suggestions.length - 1
         }
         setHightlightIndex(index)
@@ -67,7 +68,7 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
     const handleKeydown = (e: KeyboardEvent<HTMLInputElement>) => {
         switch (e.key) {
             case 'Enter':
-                if(suggestions[hightlightIndex]){
+                if (suggestions[hightlightIndex]) {
                     handleSelect(suggestions[hightlightIndex])
                 }
                 break
@@ -120,18 +121,25 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
     }
     const generateDropdown = () => {
         return (
-            <ul>
-                {suggestions.map((item, index) => {
-                    const classes = classNames('suggestion-item', {
-                        'item-hightlighted': index === hightlightIndex
-                    })
-                    return (
-                        <li className={classes} key={index} onClick={() => handleSelect(item)}>
-                            {renderTemplate(item)}
-                        </li>
-                    )
-                })}
-            </ul>
+            <Transition
+                in={!loading}
+                timeout={500}
+                animation='zoom-in-top'
+                wrapper
+            >
+                <ul>
+                    {suggestions.map((item, index) => {
+                        const classes = classNames('suggestion-item', {
+                            'item-hightlighted': index === hightlightIndex
+                        })
+                        return (
+                            <li className={classes} key={index} onClick={() => handleSelect(item)}>
+                                {renderTemplate(item)}
+                            </li>
+                        )
+                    })}
+                </ul>
+            </Transition>
         )
     }
 
@@ -143,8 +151,16 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
                 value={inputValue}
                 {...restProps}
             />
-            {loading && <ul><Icon icon={'spinner'} spin /></ul>}
-            {suggestions.length > 0 && generateDropdown()}
+            {loading &&
+                <Transition
+                    in={loading}
+                    timeout={500}
+                    animation='zoom-in-top'
+                    wrapper
+                >
+                    <ul style={{height:'50px',display:'flex',justifyContent:'center',alignItems:'center'}}><Icon icon={'spinner'} spin /></ul>
+                </Transition>}
+            {suggestions?.length > 0 && generateDropdown()}
         </div>
     )
 }
