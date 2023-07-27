@@ -7,7 +7,8 @@ import useClickOutside from '../../hooks/useClickOutside';
 import { Transition } from '../Transition/transition';
 
 interface DataSourceObject {
-    [key: string]: string;
+    value: string;
+    [key: string]: string | number;
 }
 
 export type DataSourceType<T = {}> = T & DataSourceObject
@@ -49,9 +50,11 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
                     setSuggestions(data)
                 })
             } else {
+                setLoading(false)
                 setSuggestions(results)
             }
         } else {
+            setLoading(false)
             setSuggestions([])
         }
         setHightlightIndex(-1)
@@ -102,7 +105,7 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
         // }
     }
 
-    console.log(suggestions)
+    // console.log(suggestions)
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value.trim()
         setInputValue(value)
@@ -160,7 +163,7 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
                 >
                     <ul style={{height:'50px',display:'flex',justifyContent:'center',alignItems:'center'}}><Icon icon={'spinner'} spin /></ul>
                 </Transition>}
-            {suggestions?.length > 0 && generateDropdown()}
+            {suggestions.length > 0 && generateDropdown()}
         </div>
     )
 }
