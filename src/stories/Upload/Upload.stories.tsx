@@ -3,13 +3,25 @@ import { Upload } from '../../components/Upload/Upload'
 import { action } from '@storybook/addon-actions'
 
 
+const checkFileSize = (file: File) => {
+    if(Math.round(file.size / 1024) > 50){
+        alert('file too big')
+        return false
+    }
+    return true
+}
+const filePromise = (file: File) => {
+    const newFile = new File([file], 'new_name_docx', {type: file.type})
+    return Promise.resolve(newFile)
+}
+
 const SimpleUpload: React.FC = () => {
     return (
         <Upload
             action='https://jsonplaceholder.typicode.com/posts'
-            onError={action('error')}
-            onProgress={(action('progress'))}
-            onSuccess={action('success')}
+            beforeUpload={filePromise}
+            onChange={action('changed')}
+
         ></Upload>
     )
 }
