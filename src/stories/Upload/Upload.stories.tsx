@@ -29,6 +29,11 @@ const SimpleUpload: React.FC = () => {
             action='http://127.0.0.1:3000/upload'
             onChange={action('changed')}
             defaultFileList={defaultFileList}
+            name='fileName'
+            data={{key:'value'}}
+            header={{'X-Powered-By': 'viking-ship'}}
+            accept='.png'
+            multiple
         ></Upload>
     )
 }
