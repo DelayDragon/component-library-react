@@ -1,7 +1,8 @@
-import React, { useRef, ChangeEvent, useState } from "react";
+import React, { useRef, ChangeEvent, useState, ReactNode } from "react";
 import axios from 'axios'
 import { UploadList } from "./UploadList";
 import { Button } from "../Button/Button";
+import { Dragger } from "./Dragger";
 
 export type UploadFileStaus = 'ready' | 'uploading' | 'success' | 'error'
 export interface UploadFile {
@@ -24,12 +25,14 @@ export interface UploadProps {
     onError?: (err: any, file: UploadFile) => void;
     onChange?: (file: UploadFile) => void;
     onRemove?: (file: UploadFile) => void;
-    header?: {[key: string]: any};
+    header?: { [key: string]: any };
     name?: string;
-    data?: {[key: string]: any};
+    data?: { [key: string]: any };
     withCredentials?: boolean;
     accept?: string;
     multiple?: boolean;
+    drag?: boolean;
+    children?: ReactNode;
 }
 
 export const Upload: React.FC<UploadProps> = (props) => {
@@ -47,7 +50,9 @@ export const Upload: React.FC<UploadProps> = (props) => {
         data,
         withCredentials,
         accept,
-        multiple
+        multiple,
+        drag,
+        children
     } = props
 
     const [fileList, setFileList] = useState<UploadFile[]>(defaultFileList || [])
@@ -83,7 +88,7 @@ export const Upload: React.FC<UploadProps> = (props) => {
         setFileList((prevList) => {
             return prevList.filter(item => item.uid !== file.uid)
         })
-        if(onRemove){
+        if (onRemove) {
             onRemove(file)
         }
     }
@@ -120,7 +125,7 @@ export const Upload: React.FC<UploadProps> = (props) => {
         })
         const formData = new FormData()
         formData.append(name || 'file', file)
-        if(data){
+        if (data) {
             Object.keys(data).forEach(key => {
                 formData.append(key, data[key])
             })
@@ -135,7 +140,7 @@ export const Upload: React.FC<UploadProps> = (props) => {
                 if (e.total) {
                     let percentage = Math.round((e.loaded * 100) / e.total) || 0
                     if (percentage < 100) {
-                        updateFileList(_file, {percent: percentage, status: 'uploading'})
+                        updateFileList(_file, { percent: percentage, status: 'uploading' })
 
                         if (onProgress) {
                             onProgress(percentage, _file)
@@ -144,7 +149,7 @@ export const Upload: React.FC<UploadProps> = (props) => {
                 }
             }
         }).then(res => {
-            updateFileList(_file, {status: 'success', response: res.data})
+            updateFileList(_file, { status: 'success', response: res.data })
             console.log(res);
             if (onSuccess) {
                 onSuccess(res.data, _file)
@@ -153,7 +158,7 @@ export const Upload: React.FC<UploadProps> = (props) => {
                 onChange(_file)
             }
         }).catch(err => {
-            updateFileList(_file, {status: 'error', response: err})
+            updateFileList(_file, { status: 'error', response: err })
 
             console.log(err);
             if (onError) {
@@ -168,12 +173,23 @@ export const Upload: React.FC<UploadProps> = (props) => {
 
     return (
         <div className="viking-upload-component">
-            <Button
+            {/* <Button
                 btnType="primary"
                 onClick={handleClick}
             >
-                UploadFile
-            </Button>
+                {drag ? <Dragger>
+                    {children}
+                </Dragger> : children}
+            </Button> */}
+            {
+                drag ? <Dragger onFile={(files) => {uploadFiles(files)}} onClick={handleClick}>{children}</Dragger> : 
+                <Button
+                    btnType="primary"
+                    onClick={handleClick}
+                >
+                    {children}
+                </Button>
+            }
             <input
                 className="viking-file-input"
                 style={{ display: 'none' }}
@@ -189,5 +205,6 @@ export const Upload: React.FC<UploadProps> = (props) => {
 }
 
 Upload.defaultProps = {
-    name:'file'
+    name: 'file',
+    children: <>UploadFile</>
 }

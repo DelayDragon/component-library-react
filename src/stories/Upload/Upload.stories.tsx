@@ -1,11 +1,12 @@
 import { type Meta, type StoryObj } from '@storybook/react'
 import { Upload, UploadFile } from '../../components/Upload/Upload'
 import { action } from '@storybook/addon-actions'
+import { Icon } from '../../components/Icon/Icon'
 
 const defaultFileList: UploadFile[] = [
-  { uid: '123', size: 1234, name: 'hello.md', status: 'uploading', percent: 30 },
-  { uid: '122', size: 1234, name: 'xyz.md', status: 'success', percent: 30 },
-  { uid: '121', size: 1234, name: 'eyiha.md', status: 'error', percent: 30 }
+    { uid: '123', size: 1234, name: 'hello.md', status: 'uploading', percent: 30 },
+    { uid: '122', size: 1234, name: 'xyz.md', status: 'success', percent: 30 },
+    { uid: '121', size: 1234, name: 'eyiha.md', status: 'error', percent: 30 }
 ]
 
 // 测试beforUpload的函数个例
@@ -30,10 +31,16 @@ const SimpleUpload: React.FC = () => {
             onChange={action('changed')}
             defaultFileList={defaultFileList}
             name='fileName'
-            data={{key:'value'}}
-            header={{'X-Powered-By': 'viking-ship'}}
+            data={{ key: 'value' }}
+            header={{ 'X-Powered-By': 'viking-ship' }}
             accept='.png'
             multiple
+            drag
+
+            children={<>
+                <Icon icon={'file-alt'} theme="secondary" size='lg' />
+                <span>Drag file over or cilck here to upload</span>
+            </>}
         ></Upload>
     )
 }

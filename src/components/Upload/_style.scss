@@ -3,8 +3,9 @@
     padding: 0;
     list-style-type: none;
 }
-.viking-upload-list-item{
-    transition:all .5s cubic-bezier(.55, 0, .1, 1);
+
+.viking-upload-list-item {
+    transition: all .5s cubic-bezier(.55, 0, .1, 1);
     font-size: 14px;
     line-height: 1.8;
     margin-top: 5px;
@@ -12,23 +13,29 @@
     border-radius: 4px;
     width: 200px;
     position: relative;
+
     &:first-child {
         margin-top: 10px;
     }
+
     .file-name {
         margin-left: 5px;
         margin-right: 40px;
-        svg{
+
+        svg {
             margin-right: 5px;
             color: $gray-500;
         }
     }
+
     .file-name-error {
         color: $danger;
+
         svg {
             color: $danger
         }
     }
+
     .file-status {
         display: block;
         position: absolute;
@@ -37,6 +44,7 @@
         line-height: inherit;
 
     }
+
     .file-actions {
         display: none;
         position: absolute;
@@ -45,13 +53,37 @@
         line-height: inherit;
         cursor: pointer;
     }
+
     &:hover {
         background-color: $gray-200;
-        .file-status{
+
+        .file-status {
             display: none;
         }
-        .file-actions{
+
+        .file-actions {
             display: block;
         }
+    }
+}
+
+.viking-uploader-dragger {
+    width: 300px;
+    height: 160px;
+    background-color: $gray-200;
+    border-color: $gray-300;
+    border: 1px solid $gray-300;
+    padding: 0;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+
+    &.is-dragover {
+        border: 2px dashed $blue;
+        box-sizing: border-box;
+
     }
 }
