@@ -24,7 +24,9 @@ const defaultFileList: UploadFile[] = [
 const SimpleUpload: React.FC = () => {
     return (
         <Upload
-            action='https://jsonplaceholder.typicode.com/posts'
+            // action='https://jsonplaceholder.typicode.com/posts'
+            // 自己简单搭建的文件接收接口
+            action='http://127.0.0.1:3000/upload'
             onChange={action('changed')}
             defaultFileList={defaultFileList}
         ></Upload>
