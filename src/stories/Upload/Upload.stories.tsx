@@ -1,7 +1,7 @@
 import { type Meta, type StoryObj } from '@storybook/react'
 import { Upload, UploadFile } from '../../components/Upload/Upload'
 import { action } from '@storybook/addon-actions'
-import { Icon } from '../../components/Icon/Icon'
+// import { Icon } from '../../components/Icon/Icon'
 
 const defaultFileList: UploadFile[] = [
     { uid: '123', size: 1234, name: 'hello.md', status: 'uploading', percent: 30 },
@@ -29,19 +29,14 @@ const SimpleUpload: React.FC = () => {
             // 自己简单搭建的文件接收接口
             action='http://127.0.0.1:3000/upload'
             onChange={action('changed')}
-            defaultFileList={defaultFileList}
+            // defaultFileList={defaultFileList}
             name='fileName'
             data={{ key: 'value' }}
             header={{ 'X-Powered-By': 'viking-ship' }}
             accept='.png'
             multiple
             drag
-
-            children={<>
-                <Icon icon={'file-alt'} theme="secondary" size='lg' />
-                <span>Drag file over or cilck here to upload</span>
-            </>}
-        ></Upload>
+        >Click to upload</Upload>
     )
 }
 

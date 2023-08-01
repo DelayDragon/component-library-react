@@ -21,9 +21,9 @@ export interface UploadProps {
     defaultFileList?: UploadFile[];
     beforeUpload?: (file: File) => boolean | Promise<File>
     onProgress?: (precentage: number, file: UploadFile) => void;
-    onSuccess?: (data: any, file: UploadFile) => void;
-    onError?: (err: any, file: UploadFile) => void;
-    onChange?: (file: UploadFile) => void;
+    onSuccess?: (data: any, file: File) => void;
+    onError?: (err: any, file: File) => void;
+    onChange?: (file: File) => void;
     onRemove?: (file: UploadFile) => void;
     header?: { [key: string]: any };
     name?: string;
@@ -152,20 +152,20 @@ export const Upload: React.FC<UploadProps> = (props) => {
             updateFileList(_file, { status: 'success', response: res.data })
             console.log(res);
             if (onSuccess) {
-                onSuccess(res.data, _file)
+                onSuccess(res.data, file)
             }
             if (onChange) {
-                onChange(_file)
+                onChange(file)
             }
         }).catch(err => {
             updateFileList(_file, { status: 'error', response: err })
 
-            console.log(err);
+            // console.log(err);
             if (onError) {
-                onError(err, _file)
+                onError(err, file)
             }
             if (onChange) {
-                onChange(_file)
+                onChange(file)
             }
         })
     }
@@ -182,13 +182,13 @@ export const Upload: React.FC<UploadProps> = (props) => {
                 </Dragger> : children}
             </Button> */}
             {
-                drag ? <Dragger onFile={(files) => {uploadFiles(files)}} onClick={handleClick}>{children}</Dragger> : 
-                <Button
-                    btnType="primary"
-                    onClick={handleClick}
-                >
-                    {children}
-                </Button>
+                drag ? <Dragger onFile={(files) => { uploadFiles(files) }} onClick={handleClick}>{children}</Dragger> :
+                    <Button
+                        btnType="primary"
+                        onClick={handleClick}
+                    >
+                        {children}
+                    </Button>
             }
             <input
                 className="viking-file-input"

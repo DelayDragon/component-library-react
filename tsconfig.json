@@ -20,7 +20,10 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* testing*/
+    "types": ["node", "jest", "@testing-library/jest-dom"]
   },
   "include": ["src", "test/components/Button/button.test.tsx","./setupTests.ts"],
   "references": [{ "path": "./tsconfig.node.json" }],
